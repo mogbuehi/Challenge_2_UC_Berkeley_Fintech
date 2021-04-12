@@ -11,9 +11,13 @@ This project is focused on creating a loan qualifier application that has the ab
 - Dependencies: Tested in version 3.9 of python with no issues. Detailed list provided below:
 
 fire==0.4.0
+
 path @ file:///C:/ci/path_1596940809557/work
+
 pathlib2 @ file:///C:/ci/pathlib2_1594381094851/work
+
 pathtools==0.1.2
+
 questionary==1.9.0
 
 ---
