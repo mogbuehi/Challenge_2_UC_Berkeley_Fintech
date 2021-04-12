@@ -32,13 +32,18 @@ In this section, you should include detailed installation notes containing code 
 
 ## Examples
 
-This section should include screenshots, code blocks, or animations showing how your project works.
+Example of the app with test inputs.
+![image](https://user-images.githubusercontent.com/38775809/114358368-b0f7ed00-9b27-11eb-9aca-d7820c29fedb.png)
 
 ---
 
 ## Usage
 
-This section should include screenshots, code blocks, or animations explaining how to use your project.
+- 1. Open GitBash on Windows or Terminal on Linux or Mac.
+- 2. Navigate to directory in qualifier folder where app.py file is located.
+- 3. Enter `python app.py` in order to run program. 
+- 4. Follow on-screen instructions.
+- 5. Be sure to save with .csv suffix when prompted. Your data will be located in same folder that app.py file is located. Program will not be saved otherwise and you will need to start over
 
 ---
 
