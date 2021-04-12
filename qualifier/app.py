@@ -9,7 +9,7 @@ import fire
 import questionary
 from pathlib import Path
 
-from qualifier.utils.fileio import load_csv
+from qualifier.utils.fileio import (load_csv, save_csv)
 
 from qualifier.utils.calculators import (
     calculate_monthly_debt_ratio,
@@ -21,38 +21,49 @@ from qualifier.filters.credit_score import filter_credit_score
 from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
 
-
-def save_csv(csv_string, data_dict_or_list):
-    """ 
-    Args: `csv_string` is a string object that contains the .csv file name you wish to save the data as. `data_dict_or_list`
-    is an iterable (list or string) that will be written to the .cvs file. 
-    """
-    csvpath = Path(csv_string)
-    with open (csvpath, 'w', newline='') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        for row in data_dict_or_list:
-            csvwriter.writerow(row)
-    return csvwriter
-
-
 def get_applicant_info():
     """Prompt dialog to get the applicant's financial information.
 
     Returns:
         Returns the applicant's financial information.
+
+    Added if statement to handle dividing by zero errors and entering non-numeric characters.
     """
 
     credit_score = questionary.text("What's your credit score?").ask()
+    if credit_score.isdigit() == False:
+        sys.exit('Please only enter numerical characters without spaces (example: no "$" or "," or ".")!') 
+    
     debt = questionary.text("What's your current amount of monthly debt?").ask()
+    if debt.isdigit() == False:
+        sys.exit('Please only enter numerical characters without spaces (example: no "$" or "," or ".")!') 
+    
     income = questionary.text("What's your total monthly income?").ask()
+    if income.isdigit() == False:
+        sys.exit('Please only enter numerical characters without spaces (example: no "$" or "," or ".")!')
+     
     loan_amount = questionary.text("What's your desired loan amount?").ask()
+    if loan_amount.isdigit() == False:
+        sys.exit('Please only enter numerical characters without spaces (example: no "$" or "," or ".")!')  
+   
     home_value = questionary.text("What's your home value?").ask()
-
+    if home_value.isdigit() == False:
+            sys.exit('Please only enter numerical characters without spaces (example: no "$" or "," or ".")!') 
+    
+    
     credit_score = int(credit_score)
+    
     debt = float(debt)
+    
     income = float(income)
+    if income <= 0:
+        sys.exit('Please enter income value greater than 0')
+    
     loan_amount = float(loan_amount)
+    
     home_value = float(home_value)
+    if home_value <= 0:
+        sys.exit('Please enter a home value greater than 0')
 
     return credit_score, debt, income, loan_amount, home_value
 
@@ -95,7 +106,6 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
     
     print(f"Found {len(bank_data_filtered)} qualifying loans")
     
-    print(bank_data_filtered)
     return bank_data_filtered
 
 
@@ -105,13 +115,18 @@ def save_qualifying_loans(qualifying_loans):
     Args:
         qualifying_loans (list of lists): The qualifying bank loans.
     """
-    # @TODO: Complete the usability dialog for savings the CSV Files.
-    # YOUR CODE HERE!
+    # Added functionality to test if '.csv' suffix is given using string indexing.
+    
     save_prompt = questionary.confirm(""" Would you like to save your data? 
        Note that if neither yes or no is selected, data will be saved by default""").ask()
     if save_prompt:
         file_name = questionary.text('Provide the file name you would like to save as (with .csv suffix)').ask()
-        save_csv (file_name, qualifying_loans)
+        if file_name[-4:] != '.csv':  # Added if statement to prevent getting error screen if user accidentally 
+            # enters incorrect suffix. Also covers situation when hitting enter with out inputing a file name.
+            sys.exit (f'File was saved incorrectly as "{file_name}" or none was given. Please use ".csv" prefix and or give a file name.')
+        else:
+            save_csv (file_name, qualifying_loans)
+            print (f'File was saved as {file_name}')
     
 
 def run():

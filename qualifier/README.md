@@ -253,8 +253,8 @@ zope.interface @ file:///C:/ci/zope.interface_1602002496598/work
 In this section, you should include detailed installation notes containing code blocks and screenshots.
 - 1. Install Python 3.9.x from website: [link]<https://www.python.org/downloads/>
 - 2. If using Windows be sure to install Git Bash and use that instead of the Windows Command Line Interface.
-- 3. Download and install Anaconda from website to ensure that all necessary libraries are available for install: [link]<https://www.anaconda.com/products/individual> 
-- 4. Download Load qualifier file located in this repository using xxx button.
+- 3. Download and install Anaconda from website to ensure that all necessary libraries and packages are available for install: [link]<https://www.anaconda.com/products/individual> 
+- 4. Download Loan qualifier file located in this repository using xxx button.
 - 5. From command line, navigate to the directory where app.py file is located using `cd` followed by the file path where program is located. (example: cd OneDrive/Desktop/Challenge_2_Starter_Code/qualifier)
 - 6. Install dependencies listed above using `pip install` command. 
 ---
