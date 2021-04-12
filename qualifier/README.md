@@ -27,7 +27,6 @@ In this section, you should include detailed installation notes containing code 
 - 4. Download Loan qualifier file located in this repository using xxx button.
 - 5. From command line, navigate to the directory where app.py file is located using `cd` followed by the file path where program is located. (example: cd OneDrive/Desktop/Challenge_2_Starter_Code/qualifier)
 - 6. Install dependencies listed above using `pip install` command. Usually `pip install fire` and `pip install questionary` is necessary. 
-- 
 ---
 
 ## Examples
